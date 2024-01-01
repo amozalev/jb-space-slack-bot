@@ -2,11 +2,21 @@ import {createRequire} from "module";
 
 const require = createRequire(import.meta.url);
 
+require("dotenv").config();
+const axios = require('axios');
+
 const {App} = require("@slack/bolt");
 import {issueCommandHandler, issueViewSubmit,} from "./slack/commands/commands.js";
 import {fileShareEventListener, homeEventListener} from "./slack/events/events.js";
 
-require("dotenv").config();
+export const axiosClient = axios.create({
+    baseURL: new URL(`${process.env.SPACE_URL}/${process.env.SPACE_API_PATH}`).toString(),
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.SPACE_TOKEN}`
+    }
+});
 
 export const app = new App({
     token: process.env.SLACK_BOT_TOKEN,
