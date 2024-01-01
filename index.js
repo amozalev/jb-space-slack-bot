@@ -3,13 +3,8 @@ import {createRequire} from "module";
 const require = createRequire(import.meta.url);
 
 const {App} = require("@slack/bolt");
-import {
-    fileShareEventListener,
-    homeEventListener,
-    issueCommandHandler,
-    issueViewSubmit,
-    messageEventListener
-} from "./events/events.js";
+import {issueCommandHandler, issueViewSubmit,} from "./commands/commands.js";
+import {fileShareEventListener, homeEventListener} from "./events/events.js";
 
 require("dotenv").config();
 
@@ -22,15 +17,16 @@ export const app = new App({
 
 app.event('app_home_opened', homeEventListener);
 app.event('file_shared', fileShareEventListener);
-// app.shortcut('issue', messageEventListener);
+
 app.command("/issue", issueCommandHandler);
+
 app.view('issue_view', issueViewSubmit);
 
-    // app.on()
-    // app.client.files.upload
+// app.on()
+// app.client.files.upload
 
-    (async () => {
-        const port = 3000
-        await app.start(process.env.PORT || port);
-        console.log('Bolt app started!!');
-    })();
+(async () => {
+    const port = 3000
+    await app.start(process.env.PORT || port);
+    console.log('Bolt app started!!');
+})();
