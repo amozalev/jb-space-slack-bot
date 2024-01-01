@@ -3,7 +3,7 @@ import {createRequire} from "module";
 const require = createRequire(import.meta.url);
 
 require("dotenv").config();
-const axios = require('axios');
+const {default: axios} = await import('axios');
 
 const {App} = require("@slack/bolt");
 import {issueCommandHandler, issueViewSubmit,} from "./slack/commands/commands.js";
