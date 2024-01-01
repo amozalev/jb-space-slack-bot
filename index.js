@@ -3,8 +3,8 @@ import {createRequire} from "module";
 const require = createRequire(import.meta.url);
 
 const {App} = require("@slack/bolt");
-import {issueCommandHandler, issueViewSubmit,} from "./commands/commands.js";
-import {fileShareEventListener, homeEventListener} from "./events/events.js";
+import {issueCommandHandler, issueViewSubmit,} from "./slack/commands/commands.js";
+import {fileShareEventListener, homeEventListener} from "./slack/events/events.js";
 
 require("dotenv").config();
 
