@@ -7,7 +7,7 @@ const {default: axios} = await import('axios');
 
 const {App} = require("@slack/bolt");
 import {issueCommandHandler, issueViewSubmit,} from "./slack/commands/commands.js";
-import {fileShareEventListener, homeEventListener} from "./slack/events/events.js";
+import {fileShareEventListener, homeEventListener, submitIssueToSpace} from "./slack/events/events.js";
 
 export const axiosClient = axios.create({
     baseURL: new URL(`${process.env.SPACE_URL}/${process.env.SPACE_API_PATH}`).toString(),
@@ -27,6 +27,8 @@ export const app = new App({
 
 app.event('app_home_opened', homeEventListener);
 app.event('file_shared', fileShareEventListener);
+
+app.action('issue-creation-action', submitIssueToSpace);
 
 app.command("/issue", issueCommandHandler);
 
