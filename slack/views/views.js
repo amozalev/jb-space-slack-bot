@@ -33,7 +33,7 @@ export const getIssueFormMessage = ({channelId, videoUrl, videoThumbnailUrl, emb
             },
             "label": {
                 "type": "plain_text",
-                "text": "Video url:",
+                "text": "Video url (automatically filled in) :white_check_mark:",
             },
         },
         {
@@ -46,7 +46,7 @@ export const getIssueFormMessage = ({channelId, videoUrl, videoThumbnailUrl, emb
             },
             "label": {
                 "type": "plain_text",
-                "text": "Video thumb:",
+                "text": "Video thumb (automatically filled in) :white_check_mark:",
             },
         },
         {
@@ -59,7 +59,7 @@ export const getIssueFormMessage = ({channelId, videoUrl, videoThumbnailUrl, emb
             },
             "label": {
                 "type": "plain_text",
-                "text": "Video thumb:",
+                "text": "Embedded video URL (automatically filled in) :white_check_mark:",
             },
         },
         {
@@ -71,7 +71,7 @@ export const getIssueFormMessage = ({channelId, videoUrl, videoThumbnailUrl, emb
             },
             "label": {
                 "type": "plain_text",
-                "text": "Name",
+                "text": "Name :o:",
                 "emoji": true
             }
         },
@@ -85,7 +85,7 @@ export const getIssueFormMessage = ({channelId, videoUrl, videoThumbnailUrl, emb
             },
             "label": {
                 "type": "plain_text",
-                "text": "Description",
+                "text": "Description :o:",
                 "emoji": true
             }
         },
@@ -108,7 +108,7 @@ export const getIssueFormMessage = ({channelId, videoUrl, videoThumbnailUrl, emb
         },
     ],
     // Fallback text to use when rich media can't be displayed (i.e. notifications) as well as for screen readers
-    text: "A new time off request has been submitted",
+    text: "Video is saved, please fill in the issue form",
 })
 
 export const getIssueFormView = ({videoUrl, videoThumbUrl} = {}) => ({
@@ -185,3 +185,74 @@ export const getIssueFormView = ({videoUrl, videoThumbUrl} = {}) => ({
         text: 'Create',
     },
 });
+
+export const getCreatedIssueView = ({
+                                        channelId,
+                                        issueName,
+                                        issueDescription,
+                                        createdBy,
+                                        issueStatus,
+                                        issueUrl,
+                                        videoUrl,
+                                        videoThumbnailUrl,
+                                        embeddedVideoUrl,
+                                        userName
+                                    }) => ({
+    "channel": channelId,
+    "blocks": [
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": `<${issueUrl}|:beetle: *${issueName}*>`
+            }
+        },
+        {
+            "type": "divider"
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "plain_text",
+                "text": `${issueDescription}`,
+                "emoji": true
+            }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "plain_text",
+                "text": `Created by: ${createdBy}`,
+                "emoji": true
+            }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "plain_text",
+                "text": `Status: ${issueStatus}`,
+                "emoji": true
+            }
+        },
+        // {
+        //     "type": "video",
+        //     "title": {
+        //         "type": "plain_text",
+        //         "text": "Issue",
+        //         "emoji": true
+        //     },
+        //     "alt_text": "How to use Slack?",
+        //     "description": {
+        //         "type": "plain_text",
+        //         "text": "Slack is a nifty way to communicate with your team.",
+        //         "emoji": true
+        //     },
+        //     "video_url": videoUrl,
+        //     "thumbnail_url": videoThumbnailUrl,
+        //     "author_name": userName,
+        //     // "provider_name": "YouTube",
+        //     // "provider_icon_url": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png"
+        // }
+    ],
+    text: "New issue is sent to #replan_bugs channel",
+})

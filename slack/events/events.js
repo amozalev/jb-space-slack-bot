@@ -1,7 +1,8 @@
 import {createRequire} from "module";
-import {homeView, getIssueFormMessage} from "../views/views.js";
+import {homeView, getIssueFormMessage, getCreatedIssueView} from "../views/views.js";
 import {getIssueTemplate} from "../../space/issues/utils.js";
 import {issuesApi} from "../../space/issues/issuesApi.js";
+import {axiosClient} from "../../index.js";
 
 const require = createRequire(import.meta.url);
 let fs = require('fs');
@@ -34,7 +35,7 @@ export const fileShareEventListener = async ({event, client, body, context, say}
 
     try {
         const fileInfo = await client.files.info({file: file_id});
-        const {file: {mp4, hls_embed, thumb_video}} = fileInfo
+        const {file: {mp4, hls_embed, thumb_video, permalink,}} = fileInfo;
 
         const msgResponse = await client.chat.postMessage(getIssueFormMessage({
             channelId: channel_id,
@@ -48,13 +49,16 @@ export const fileShareEventListener = async ({event, client, body, context, say}
     }
 }
 
-export const submitIssueToSpace = async ({body, ack}) => {
+export const submitIssueToSpace = async ({body, client, ack}) => {
     // await ack();
+
+    const {response_url, channel: {id: channelId}, user: {name: userName}} = body;
+
 
     const {
         block_video_url: {videoUrl: {value: videoUrl}},
         block_thumb_video: {videoThumbUrl: {value: videoThumbUrl}},
-        block_embed_video: embedVideo,
+        block_embed_video: {embedVideoUrl: {value: embedVideoUrl}},
         block_name: {name: {value: name}},
         block_description: {description: {value: description}}
     } = body.state.values;
@@ -67,5 +71,30 @@ export const submitIssueToSpace = async ({body, ack}) => {
     });
 
     const issue = await issuesApi.createSpaceIssue(issueTemplate);
+    const {data: {projectId, id, number, createdBy: {name: createdBy}, status: {id: statusId}}} = issue;
+    const issueUrl = `${process.env.SPACE_URL}/p/replan-city/issues/${number}`;
 
+    const resp = await axiosClient.post(response_url, {
+        "replace_original": "true",
+        "text": `Yaaay! issue ${issueUrl} is successfully saved in Space.\n Message is sent to <https://replan-group.slack.com/archives/${process.env.SPACE_BUGS_CHAT_ID}|#replan_bugs>.`
+    });
+
+    const view = getCreatedIssueView({
+        channelId: process.env.SPACE_BUGS_CHAT_ID,
+        issueName: `${name} (${number})`,
+        issueDescription: description,
+        createdBy,
+        issueStatus: statusId,
+        issueUrl,
+        videoUrl,
+        videoThumbnailUrl: videoThumbUrl,
+        embeddedVideoUrl: embedVideoUrl,
+        userName
+    });
+
+    const msgResponse = await client.chat.postMessage(view);
+    const msgResponse1 = await client.chat.postMessage({
+        channel: process.env.SPACE_BUGS_CHAT_ID,
+        text: `${videoUrl}`
+    });
 }

@@ -15,5 +15,13 @@ export const issuesApi = {
 
     getSpaceIssue: async ({projectId, issueId}) => {
         return await axiosClient.get(`/projects/${projectId}/planning/issues/${issueId}`);
+    },
+
+    getSpaceIssueByNumber: async ({projectId, number}) => {
+        return await axiosClient.get(`projects/${projectId}/planning/issues/number:${number}`);
+    },
+
+    getAllIssueStatuses: async ({projectId}) => {
+        return await axiosClient.get(`/projects/${projectId}/planning/issues/statuses`)
     }
 };
