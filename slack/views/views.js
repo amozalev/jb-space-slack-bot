@@ -7,11 +7,23 @@ export const homeView = {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "*Welcome to issues creator bot tab* :tada:"
+                "text": "*Welcome to the issues bot* :robot_face:"
             }
         },
         {
             "type": "divider"
+        },
+        {
+            "type": "image",
+            "image_url": "https://proactions.ru/media/actions/2023/04/04/samokat.jpg.500x300_q95.jpg",
+            "alt_text": "inspiration"
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": `1. Go to the bot channel;\n\n 2. Record a video clip;\n\n 3. Send to bot;\n\n 4. Fill in and submit a form;\n\n 5. Find a confirmation message in <https://replan-group.slack.com/archives/${process.env.SPACE_BUGS_CHAT_ID}|#replan_bugs> channel;\n\n 6. Profit :tada:`
+            }
         },
     ]
 }
