@@ -8,7 +8,6 @@ export const issueCommandHandler = async ({command, ack, body, say, client}) => 
     const view = getIssueFormView();
 
     try {
-        // say("Yaaay! that command works!");
 
         const result = await client.views.open({
             user_id: command.user_id,
@@ -16,7 +15,6 @@ export const issueCommandHandler = async ({command, ack, body, say, client}) => 
             view
         });
     } catch (error) {
-        console.log("err")
         console.error(error);
     }
 }
