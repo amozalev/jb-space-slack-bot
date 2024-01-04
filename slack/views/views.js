@@ -32,6 +32,27 @@ export const getIssueFormMessage = ({channelId, videoUrl, videoThumbnailUrl, emb
     channel: channelId,
     blocks: [
         {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*Issue form:*"
+            },
+            "accessory": {
+                "type": "overflow",
+                "action_id": "msg_delete_action",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": ":x: Delete",
+                            "emoji": true
+                        },
+                        "value": "delete",
+                    }
+                ]
+            }
+        },
+        {
             "type": "input",
             "block_id": "block_video_url",
             "element": {
@@ -123,6 +144,8 @@ export const getIssueFormMessage = ({channelId, videoUrl, videoThumbnailUrl, emb
     text: "Video is saved, please fill in the issue form",
 })
 
+
+// Used in /issue command
 export const getIssueFormView = ({videoUrl, videoThumbUrl} = {}) => ({
     type: "modal",
     callback_id: 'issue_view',
