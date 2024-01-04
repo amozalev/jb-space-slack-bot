@@ -22,7 +22,31 @@ export const homeView = {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": `1. Go to the bot channel;\n\n 2. Record a video clip;\n\n 3. Send to bot;\n\n 4. Fill in and submit a form;\n\n 5. Find a confirmation message in <https://replan-group.slack.com/archives/${process.env.SPACE_BUGS_CHAT_ID}|#replan_bugs> channel;\n\n 6. Profit :tada:`
+                "text": `1. Go to the <https://replan-group.slack.com/archives/${process.env.SPACE_BUGS_CHAT_ID}|#replan_bugs> or bot channel;\n\n 2. Record a video clip;\n`
+            }
+        },
+        {
+			"type": "image",
+			"image_url": "http://95.216.153.140:5000/slack/assets/videoClipPicture.png",
+			"alt_text": "Video clip icon"
+		},
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": `3. Open a context menu by right mouse click on an appeared video => "More message actions" => " Create a bug" shortcut";\n\n`
+            }
+        },
+        {
+			"type": "image",
+			"image_url": "http://95.216.153.140:5000/slack/assets/shortcutPicture.png",
+			"alt_text": "Create a bug"
+		},
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": `4. Fill in and submit a form;\n\n 5. Find a confirmation message in <https://replan-group.slack.com/archives/${process.env.SPACE_BUGS_CHAT_ID}|#replan_bugs> channel;\n\n 6. Profit :tada:`
             }
         },
     ]
@@ -182,38 +206,38 @@ export const getIssueFormView = ({videoUrl, videoThumbUrl} = {}) => ({
                 "emoji": true
             }
         },
-        {
-            "type": "input",
-            "block_id": "block_name",
-            "element": {
-                "type": "plain_text_input",
-                "action_id": "name"
-            },
-            "label": {
-                "type": "plain_text",
-                "text": "Name",
-                "emoji": true
-            }
-        },
-        {
-            "type": "input",
-            "elements": [
-                {
-                    "type": "plain_text",
-                    "text": `Video URL: ${videoUrl}`
-                }
-            ]
-        },
-        {
-            "type": "input",
-            "title": {
-                "type": "plain_text",
-                "text": "I Need a Marg",
-                "emoji": true
-            },
-            "image_url": `${videoThumbUrl}`,
-            "alt_text": "marg"
-        }
+        // {
+        //     "type": "input",
+        //     "block_id": "block_name",
+        //     "element": {
+        //         "type": "plain_text_input",
+        //         "action_id": "name"
+        //     },
+        //     "label": {
+        //         "type": "plain_text",
+        //         "text": "Name",
+        //         "emoji": true
+        //     }
+        // },
+        // {
+        //     "type": "input",
+        //     "elements": [
+        //         {
+        //             "type": "plain_text",
+        //             "text": `Video URL: ${videoUrl}`
+        //         }
+        //     ]
+        // },
+        // {
+        //     "type": "input",
+        //     "title": {
+        //         "type": "plain_text",
+        //         "text": "I Need a Marg",
+        //         "emoji": true
+        //     },
+        //     "image_url": `${videoThumbUrl}`,
+        //     "alt_text": "marg"
+        // }
     ],
     submit: {
         type: 'plain_text',
