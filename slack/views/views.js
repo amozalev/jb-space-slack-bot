@@ -264,6 +264,20 @@ export const getCreatedIssueView = ({
             "text": {
                 "type": "mrkdwn",
                 "text": `<${issueUrl}|:beetle: *${issueName}*>`
+            },
+            "accessory": {
+                "type": "overflow",
+                "action_id": "msg_delete_action",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": ":x: Delete",
+                            "emoji": true
+                        },
+                        "value": "delete",
+                    }
+                ]
             }
         },
         {
