@@ -1,6 +1,7 @@
 import {getIssueFormMessage} from "../views/views.js";
 
-export const createBugShortcut = async ({body, client, ...args}) => {
+export const createBugShortcut = async ({body, client, ack}) => {
+    await ack();
 
     const {message: {files}, channel: {id: channelId}} = body
 
