@@ -26,10 +26,10 @@ export const homeView = {
             }
         },
         {
-			"type": "image",
-			"image_url": "http://95.216.153.140:5000/slack/assets/videoClipPicture.png",
-			"alt_text": "Video clip icon"
-		},
+            "type": "image",
+            "image_url": `${process.env.SLACK_BOT_LOCALHOST}/slack/assets/videoClipPicture.png`,
+            "alt_text": "Video clip icon"
+        },
         {
             "type": "section",
             "text": {
@@ -38,10 +38,10 @@ export const homeView = {
             }
         },
         {
-			"type": "image",
-			"image_url": "http://95.216.153.140:5000/slack/assets/shortcutPicture.png",
-			"alt_text": "Create a bug"
-		},
+            "type": "image",
+            "image_url": `${process.env.SLACK_BOT_LOCALHOST}/slack/assets/shortcutPicture.png`,
+            "alt_text": "Create a bug"
+        },
         {
             "type": "section",
             "text": {
