@@ -1,5 +1,5 @@
 import {createRequire} from "module";
-import {homeView, getIssueFormMessage, getCreatedIssueView} from "../views/views.js";
+import {getHoveView, getIssueFormMessage, getCreatedIssueView} from "../views/views.js";
 import {getIssueTemplate} from "../../space/issues/utils.js";
 import {issuesApi} from "../../space/issues/issuesApi.js";
 import {axiosClient} from "../../index.js";
@@ -23,7 +23,11 @@ export const homeEventListener = async ({event, client, body, context}) => {
         const result = await client.views.publish({
             user_id: event.user,
             trigger_id: body.trigger_id,
-            view: homeView
+            view: getHoveView({
+                bugsChannelId: process.env.SPACE_BUGS_CHAT_ID,
+                videoClipPicture: `${process.env.SLACK_BOT_LOCALHOST}/slack/assets/videoClipPicture.png`,
+                shortcutPicture: `${process.env.SLACK_BOT_LOCALHOST}/slack/assets/shortcutPicture.png`
+            })
         });
     } catch (error) {
         console.error(error);

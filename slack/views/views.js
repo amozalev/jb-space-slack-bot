@@ -1,4 +1,4 @@
-export const homeView = {
+export const getHoveView = ({videoClipPicture, shortcutPicture, bugsChannelId}) => ({
     type: 'home',
     callback_id: 'home_view',
 
@@ -22,12 +22,12 @@ export const homeView = {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": `1. Go to the <https://replan-group.slack.com/archives/${process.env.SPACE_BUGS_CHAT_ID}|#replan_bugs> or bot channel;\n\n 2. Record a video clip;\n`
+                "text": `1. Go to the <https://replan-group.slack.com/archives/${bugsChannelId}|#replan_bugs> or bot channel;\n\n 2. Record a video clip;\n`
             }
         },
         {
             "type": "image",
-            "image_url": `${process.env.SLACK_BOT_LOCALHOST}/slack/assets/videoClipPicture.png`,
+            "image_url": videoClipPicture,
             "alt_text": "Video clip icon"
         },
         {
@@ -39,18 +39,18 @@ export const homeView = {
         },
         {
             "type": "image",
-            "image_url": `${process.env.SLACK_BOT_LOCALHOST}/slack/assets/shortcutPicture.png`,
+            "image_url": shortcutPicture,
             "alt_text": "Create a bug"
         },
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": `4. Fill in and submit a form;\n\n 5. Find a confirmation message in <https://replan-group.slack.com/archives/${process.env.SPACE_BUGS_CHAT_ID}|#replan_bugs> channel;\n\n 6. Profit :tada:`
+                "text": `4. Fill in and submit a form;\n\n 5. Find a confirmation message in <https://replan-group.slack.com/archives/${bugsChannelId}|#replan_bugs> channel;\n\n 6. Profit :tada:`
             }
         },
     ]
-}
+})
 
 export const getIssueFormMessage = ({channelId, videoUrl, videoThumbnailUrl, embedVideoUrl}) => ({
     channel: channelId,
