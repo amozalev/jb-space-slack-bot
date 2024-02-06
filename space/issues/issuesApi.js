@@ -23,5 +23,13 @@ export const issuesApi = {
 
     getAllIssueStatuses: async ({projectId}) => {
         return await axiosClient.get(`/projects/${projectId}/planning/issues/statuses`)
+    },
+
+    getAllusers: async () => {
+        return await axiosClient.get('/team-directory/profiles?$fields=data(id,username)');
+    },
+
+    getAllBoards: async ({projectId}) => {
+        return await axiosClient.get(`/projects/${projectId}/planning/boards/sprints?$fields=data(state,id,board)`);
     }
 };
