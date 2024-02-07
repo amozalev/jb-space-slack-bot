@@ -100,32 +100,32 @@ export const getIssueFormMessage = ({
                 "text": "Video url (automatically filled in) :white_check_mark:",
             },
         },
-        {
-            "type": "input",
-            "block_id": "block_thumb_video",
-            "element": {
-                "type": "plain_text_input",
-                "action_id": "videoThumbUrl",
-                "initial_value": videoThumbnailUrl,
-            },
-            "label": {
-                "type": "plain_text",
-                "text": "Video thumb (automatically filled in) :white_check_mark:",
-            },
-        },
-        {
-            "type": "input",
-            "block_id": "block_embed_video",
-            "element": {
-                "type": "plain_text_input",
-                "action_id": "embedVideoUrl",
-                "initial_value": embedVideoUrl,
-            },
-            "label": {
-                "type": "plain_text",
-                "text": "Embedded video URL (automatically filled in) :white_check_mark:",
-            },
-        },
+        // {
+        //     "type": "input",
+        //     "block_id": "block_thumb_video",
+        //     "element": {
+        //         "type": "plain_text_input",
+        //         "action_id": "videoThumbUrl",
+        //         "initial_value": videoThumbnailUrl,
+        //     },
+        //     "label": {
+        //         "type": "plain_text",
+        //         "text": "Video thumb (automatically filled in) :white_check_mark:",
+        //     },
+        // },
+        // {
+        //     "type": "input",
+        //     "block_id": "block_embed_video",
+        //     "element": {
+        //         "type": "plain_text_input",
+        //         "action_id": "embedVideoUrl",
+        //         "initial_value": embedVideoUrl,
+        //     },
+        //     "label": {
+        //         "type": "plain_text",
+        //         "text": "Embedded video URL (automatically filled in) :white_check_mark:",
+        //     },
+        // },
         {
             "type": "input",
             "block_id": "block_name",
@@ -378,14 +378,14 @@ export const getCreatedIssueView = ({
                 "emoji": true
             }
         },
-        {
-            "type": "section",
-            "text": {
-                "type": "plain_text",
-                "text": `Created by: ${createdBy}`,
-                "emoji": true
-            }
-        },
+        // {
+        //     "type": "section",
+        //     "text": {
+        //         "type": "plain_text",
+        //         "text": `Created by: ${createdBy}`,
+        //         "emoji": true
+        //     }
+        // },
         {
             "type": "section",
             "text": {
@@ -394,14 +394,14 @@ export const getCreatedIssueView = ({
                 "emoji": true
             }
         },
-        {
-            "type": "section",
-            "text": {
-                "type": "plain_text",
-                "text": `Sprint: ${board}`,
-                "emoji": true
-            }
-        },
+        // {
+        //     "type": "section",
+        //     "text": {
+        //         "type": "plain_text",
+        //         "text": `Sprint: ${board}`,
+        //         "emoji": true
+        //     }
+        // },
         // {
         //     "type": "video",
         //     "title": {

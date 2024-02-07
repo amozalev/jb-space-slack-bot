@@ -60,12 +60,12 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
 
     const {
         block_video_url: {videoUrl: {value: videoUrl}},
-        block_thumb_video: {videoThumbUrl: {value: videoThumbUrl}},
-        block_embed_video: {embedVideoUrl: {value: embedVideoUrl}},
+        // block_thumb_video: {videoThumbUrl: {value: videoThumbUrl}},
+        // block_embed_video: {embedVideoUrl: {value: embedVideoUrl}},
         block_name: {name: {value: name}},
         block_description: {description: {value: description}},
         block_users: {users: {selected_option: {value: user}}},
-        block_status: {status: {selected_option: {value: status}}},
+        block_status: {status: {selected_option: {text: {text: statusName}, value: statusId}}},
         // block_boards: {boards: {selected_option: {value: board}}}
     } = body.state.values;
 
@@ -73,19 +73,20 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
         title: name,
         description: description,
         assignee: user,
-        status,
+        status: statusId,
         // sprint: board,
         videoUrl: videoUrl,
-        videoThumbUrl: videoThumbUrl
+        // videoThumbUrl: videoThumbUrl
     });
 
     const issue = await issuesApi.createSpaceIssue(issueTemplate);
-    const {data: {projectId, id, number, createdBy: {name: createdBy}, status: {id: statusId}}} = issue;
+    const {data: {projectId, id, number, createdBy: {name: createdBy}}} = issue;
+
     const issueUrl = `${process.env.SPACE_URL}/p/replan-city/issues/${number}`;
 
     const resp = await axiosClient.post(response_url, {
         "replace_original": "true",
-        "text": `Yaaay! issue ${issueUrl} is successfully saved in Space.\n Message is sent to <https://replan-group.slack.com/archives/${process.env.SPACE_BUGS_CHAT_ID}|#replan_bugs>.`
+        "text": `${issueUrl} is saved in Space.\n`
     });
 
     const view = getCreatedIssueView({
@@ -93,18 +94,16 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
         issueName: `${name} (${number})`,
         issueDescription: description,
         createdBy,
-        issueStatus: status,
-        board,
+        issueStatus: statusName,
+        // board,
         issueUrl,
         videoUrl,
-        videoThumbnailUrl: videoThumbUrl,
-        embeddedVideoUrl: embedVideoUrl,
         userName
     });
 
     const msgResponse = await client.chat.postMessage(view);
-    const msgResponse1 = await client.chat.postMessage({
-        channel: process.env.SPACE_BUGS_CHAT_ID,
-        text: `${videoUrl}`
-    });
+    // const msgResponse1 = await client.chat.postMessage({
+    //     channel: process.env.SPACE_BUGS_CHAT_ID,
+    //     text: `${videoUrl}`
+    // });
 }
