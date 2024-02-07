@@ -73,6 +73,7 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
         title: name,
         description: description,
         assignee: user,
+        createdBy: userName,
         status: statusId,
         // sprint: board,
         videoUrl: videoUrl,
@@ -80,7 +81,7 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
     });
 
     const issue = await issuesApi.createSpaceIssue(issueTemplate);
-    const {data: {projectId, id, number, createdBy: {name: createdBy}}} = issue;
+    const {data: {projectId, id, number}} = issue;
 
     const issueUrl = `${process.env.SPACE_URL}/p/replan-city/issues/${number}`;
 
@@ -93,15 +94,14 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
         channelId: process.env.SPACE_BUGS_CHAT_ID,
         issueName: `${name} (${number})`,
         issueDescription: description,
-        createdBy,
+        createdBy: userName,
         issueStatus: statusName,
         // board,
         issueUrl,
         videoUrl,
-        userName
     });
 
-    const msgResponse = await client.chat.postMessage(view);
+    // const msgResponse = await client.chat.postMessage(view);
     // const msgResponse1 = await client.chat.postMessage({
     //     channel: process.env.SPACE_BUGS_CHAT_ID,
     //     text: `${videoUrl}`

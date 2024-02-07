@@ -342,7 +342,6 @@ export const getCreatedIssueView = ({
                                         videoUrl,
                                         videoThumbnailUrl,
                                         embeddedVideoUrl,
-                                        userName
                                     }) => ({
     "channel": channelId,
     "blocks": [
@@ -378,14 +377,14 @@ export const getCreatedIssueView = ({
                 "emoji": true
             }
         },
-        // {
-        //     "type": "section",
-        //     "text": {
-        //         "type": "plain_text",
-        //         "text": `Created by: ${createdBy}`,
-        //         "emoji": true
-        //     }
-        // },
+        {
+            "type": "section",
+            "text": {
+                "type": "plain_text",
+                "text": `Created by: ${createdBy}`,
+                "emoji": true
+            }
+        },
         {
             "type": "section",
             "text": {
