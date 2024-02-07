@@ -52,9 +52,16 @@ export const getHoveView = ({videoClipPicture, shortcutPicture, bugsChannelId}) 
     ]
 })
 
-export const getIssueFormMessage = ({channelId, videoUrl, videoThumbnailUrl, embedVideoUrl}) => ({
-    channel: channelId,
-    blocks: [
+export const getIssueFormMessage = ({
+                                        channelId,
+                                        videoUrl,
+                                        videoThumbnailUrl,
+                                        embedVideoUrl,
+                                        users,
+                                        statuses,
+                                        boards
+                                    }) => {
+    const blocks = [
         {
             "type": "section",
             "text": {
@@ -145,7 +152,81 @@ export const getIssueFormMessage = ({channelId, videoUrl, videoThumbnailUrl, emb
                 "text": "Description :o:",
                 "emoji": true
             }
-        },
+        }
+    ];
+
+    if (users.length) {
+        blocks.push(
+            {
+                "type": "section",
+                "block_id": "block_users",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "Assignee"
+                },
+                "accessory": {
+                    "type": "static_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "Select an item",
+                        "emoji": true
+                    },
+                    "initial_option": users[0],
+                    "options": users,
+                    "action_id": "users"
+                }
+            },
+        )
+    }
+    if (statuses.length) {
+        blocks.push(
+            {
+                "type": "section",
+                "block_id": "block_status",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "Status"
+                },
+                "accessory": {
+                    "type": "static_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "Select an item",
+                        "emoji": true
+                    },
+                    "initial_option": statuses[0],
+                    "options": statuses,
+                    "action_id": "status"
+                }
+            },
+        );
+    }
+    if (boards.length) {
+        blocks.push(
+            {
+                "type": "section",
+                "block_id": "block_boards",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "Status"
+                },
+                "accessory": {
+                    "type": "static_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "Select an item",
+                        "emoji": true
+                    },
+                    "initial_option": boards[0],
+                    "options": boards,
+                    "action_id": "boards"
+                }
+            },
+        );
+    }
+
+    const updatedBlocks = [
+        ...blocks,
         {
             "type": "divider"
         },
@@ -162,11 +243,16 @@ export const getIssueFormMessage = ({channelId, videoUrl, videoThumbnailUrl, emb
                     "action_id": "issue-creation-action"
                 }
             ]
-        },
-    ],
-    // Fallback text to use when rich media can't be displayed (i.e. notifications) as well as for screen readers
-    text: "Video is saved, please fill in the issue form",
-})
+        }
+    ];
+
+    return {
+        channel: channelId,
+        blocks: updatedBlocks,
+        // Fallback text to use when rich media can't be displayed (i.e. notifications) as well as for screen readers
+        text: "Video is saved, please fill in the issue form",
+    }
+};
 
 
 // Used in /issue command
@@ -251,6 +337,7 @@ export const getCreatedIssueView = ({
                                         issueDescription,
                                         createdBy,
                                         issueStatus,
+                                        board,
                                         issueUrl,
                                         videoUrl,
                                         videoThumbnailUrl,
@@ -304,6 +391,14 @@ export const getCreatedIssueView = ({
             "text": {
                 "type": "plain_text",
                 "text": `Status: ${issueStatus}`,
+                "emoji": true
+            }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "plain_text",
+                "text": `Sprint: ${board}`,
                 "emoji": true
             }
         },

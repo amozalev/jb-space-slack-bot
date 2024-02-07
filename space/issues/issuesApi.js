@@ -4,6 +4,7 @@ export const issuesApi = {
     createSpaceIssue: async ({projectId, data}) => {
         const fetchParams = {
             title: '',
+            assignee: null,
             status: '',
         }
 
@@ -30,6 +31,6 @@ export const issuesApi = {
     },
 
     getAllBoards: async ({projectId}) => {
-        return await axiosClient.get(`/projects/${projectId}/planning/boards/sprints?$fields=data(state,id,board)`);
+        return await axiosClient.get(`/projects/${projectId}/planning/boards/sprints?$fields=data(id,name,state)`);
     }
 };

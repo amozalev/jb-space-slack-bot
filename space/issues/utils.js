@@ -1,4 +1,4 @@
-export const getIssueTemplate = ({title, description, videoUrl, videoThumbUrl}) => {
+export const getIssueTemplate = ({title, description, assignee, sprint, status, videoUrl, videoThumbUrl}) => {
     const descriptionTemplate = `
     ${description}\n
     
@@ -12,7 +12,9 @@ export const getIssueTemplate = ({title, description, videoUrl, videoThumbUrl}) 
         data: {
             title,
             description: descriptionTemplate,
-            status: process.env.SPACE_OPEN_STATUS_ID,
+            assignee,
+            status: status,
+            // sprints: sprint
             // attachments: [
             //     {
             //         className: "VideoAttachment",

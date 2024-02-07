@@ -58,18 +58,23 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
 
     const {response_url, channel: {id: channelId}, user: {name: userName}} = body;
 
-
     const {
         block_video_url: {videoUrl: {value: videoUrl}},
         block_thumb_video: {videoThumbUrl: {value: videoThumbUrl}},
         block_embed_video: {embedVideoUrl: {value: embedVideoUrl}},
         block_name: {name: {value: name}},
-        block_description: {description: {value: description}}
+        block_description: {description: {value: description}},
+        block_users: {users: {selected_option: {value: user}}},
+        block_status: {status: {selected_option: {value: status}}},
+        // block_boards: {boards: {selected_option: {value: board}}}
     } = body.state.values;
 
     const issueTemplate = getIssueTemplate({
         title: name,
         description: description,
+        assignee: user,
+        status,
+        // sprint: board,
         videoUrl: videoUrl,
         videoThumbUrl: videoThumbUrl
     });
@@ -88,7 +93,8 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
         issueName: `${name} (${number})`,
         issueDescription: description,
         createdBy,
-        issueStatus: statusId,
+        issueStatus: status,
+        board,
         issueUrl,
         videoUrl,
         videoThumbnailUrl: videoThumbUrl,
