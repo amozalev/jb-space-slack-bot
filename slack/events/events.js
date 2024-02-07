@@ -101,7 +101,7 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
         videoUrl,
     });
 
-    // const msgResponse = await client.chat.postMessage(view);
+    const msgResponse = await client.chat.postMessage(view);
     // const msgResponse1 = await client.chat.postMessage({
     //     channel: process.env.SPACE_BUGS_CHAT_ID,
     //     text: `${videoUrl}`
