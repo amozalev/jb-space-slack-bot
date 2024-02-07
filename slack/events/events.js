@@ -86,8 +86,7 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
     const issueUrl = `${process.env.SPACE_URL}/p/replan-city/issues/${number}`;
 
     const resp = await axiosClient.post(response_url, {
-        "replace_original": "true",
-        "text": `${issueUrl} is saved in Space.\n`
+        "delete_original": "true",
     });
 
     const view = getCreatedIssueView({

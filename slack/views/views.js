@@ -349,7 +349,7 @@ export const getCreatedIssueView = ({
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": `<${issueUrl}|:beetle: *${issueName}*>`
+                "text": `<${issueUrl}| *${issueName}*>`
             },
             "accessory": {
                 "type": "overflow",
