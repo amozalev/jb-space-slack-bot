@@ -64,7 +64,7 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
         // block_embed_video: {embedVideoUrl: {value: embedVideoUrl}},
         block_name: {name: {value: name}},
         block_description: {description: {value: description}},
-        block_users: {users: {selected_option: {value: user}}},
+        block_users: {users: {selected_option: {text: {text: assigneeName}, value: user}}},
         block_status: {status: {selected_option: {text: {text: statusName}, value: statusId}}},
         // block_boards: {boards: {selected_option: {value: board}}}
     } = body.state.values;
@@ -95,6 +95,7 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
         issueDescription: description,
         createdBy: userName,
         issueStatus: statusName,
+        assignee: assigneeName,
         // board,
         issueUrl,
         videoUrl,

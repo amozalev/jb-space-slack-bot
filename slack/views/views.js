@@ -337,6 +337,7 @@ export const getCreatedIssueView = ({
                                         issueDescription,
                                         createdBy,
                                         issueStatus,
+                                        assignee,
                                         board,
                                         issueUrl,
                                         videoUrl,
@@ -382,6 +383,14 @@ export const getCreatedIssueView = ({
             "text": {
                 "type": "plain_text",
                 "text": `Created by: ${createdBy}`,
+                "emoji": true
+            }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "plain_text",
+                "text": `Assignee: ${assignee}`,
                 "emoji": true
             }
         },

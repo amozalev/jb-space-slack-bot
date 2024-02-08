@@ -1,5 +1,5 @@
 export const getIssueTemplate = ({title, description, assignee, createdBy, sprint, status, videoUrl, videoThumbUrl}) => {
-    const descriptionTemplate = `Created by: ${createdBy}.\n\n${description}\n`;
+    const descriptionTemplate = `Created by: ${createdBy}.\n\n-------------------------------------\n\n${description}\n\nVideo: ${videoUrl}`;
 
     return {
         projectId: process.env.SPACE_PROJECT_ID,
