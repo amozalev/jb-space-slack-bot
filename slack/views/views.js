@@ -217,7 +217,7 @@ export const getIssueFormMessage = ({
                 "block_id": "block_boards",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "Status"
+                    "text": "Sprint"
                 },
                 "accessory": {
                     "type": "static_select",
