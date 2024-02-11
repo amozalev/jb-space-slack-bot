@@ -390,33 +390,29 @@ export const getCreatedIssueView = ({
         {
             "type": "section",
             "text": {
-                "type": "plain_text",
+                "type": "mrkdwn",
                 "text": `*Created by*: ${createdBy}`,
-                "emoji": true
             }
         },
         {
             "type": "section",
             "text": {
-                "type": "plain_text",
-                "text": `*Assignee*: ${assignee}`,
-                "emoji": true
+                "type": "mrkdwn",
+                "text": `*Assignee*: ${assignee}`
             }
         },
         {
             "type": "section",
             "text": {
-                "type": "plain_text",
-                "text": `*Status*: ${issueStatus}`,
-                "emoji": true
+                "type": "mrkdwn",
+                "text": `*Status*: ${issueStatus}`
             }
         },
         {
             "type": "section",
             "text": {
-                "type": "plain_text",
-                "text": `Sprint: ${board}`,
-                "emoji": true
+                "type": "mrkdwn",
+                "text": `*Sprint*: ${board}`
             }
         },
         // {
