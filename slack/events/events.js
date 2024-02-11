@@ -64,9 +64,10 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
         // block_embed_video: {embedVideoUrl: {value: embedVideoUrl}},
         block_name: {name: {value: name}},
         block_description: {description: {value: description}},
+        block_creator: {creator: {selected_option: {text: {text: creatorName}, value: creatorId}}},
         block_users: {users: {selected_option: {text: {text: assigneeName}, value: user}}},
         block_status: {status: {selected_option: {text: {text: statusName}, value: statusId}}},
-        // block_boards: {boards: {selected_option: {value: board}}}
+        block_boards: {boards: {selected_option: {text: {text: boardName}, value: board}}}
     } = body.state.values;
 
     const issueTemplate = getIssueTemplate({
@@ -75,13 +76,15 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
         assignee: user,
         createdBy: userName,
         status: statusId,
-        // sprint: board,
+        sprint: board,
         videoUrl: videoUrl,
         // videoThumbUrl: videoThumbUrl
     });
 
     const issue = await issuesApi.createSpaceIssue(issueTemplate);
-    const {data: {projectId, id, number}} = issue;
+    const {data: {projectId, id: issueId, number, channel: {id: issueChannelId}}} = issue;
+
+    const subscribeResp = await issuesApi.addUserToChannel({issueId, creatorId});
 
     const issueUrl = `${process.env.SPACE_URL}/p/replan-city/issues/${number}`;
 
@@ -96,7 +99,7 @@ export const submitIssueToSpace = async ({body, client, ack}) => {
         createdBy: userName,
         issueStatus: statusName,
         assignee: assigneeName,
-        // board,
+        board: boardName,
         issueUrl,
         videoUrl,
     });

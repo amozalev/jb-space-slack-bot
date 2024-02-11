@@ -4,16 +4,6 @@ export const getHoveView = ({videoClipPicture, shortcutPicture, bugsChannelId}) 
 
     blocks: [
         {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "*Welcome to the issues bot* :robot_face:"
-            }
-        },
-        {
-            "type": "divider"
-        },
-        {
             "type": "image",
             "image_url": "https://proactions.ru/media/actions/2023/04/04/samokat.jpg.500x300_q95.jpg",
             "alt_text": "inspiration"
@@ -22,7 +12,7 @@ export const getHoveView = ({videoClipPicture, shortcutPicture, bugsChannelId}) 
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": `1. Go to the <https://replan-group.slack.com/archives/${bugsChannelId}|#replan_bugs> or bot channel;\n\n 2. Record a video clip;\n`
+                "text": `1. Go to the <https://replan-group.slack.com/archives/${bugsChannelId}|#replan_bugs>;\n\n 2. Record a video clip;\n`
             }
         },
         {
@@ -157,6 +147,25 @@ export const getIssueFormMessage = ({
 
     if (users.length) {
         blocks.push(
+            {
+                "type": "section",
+                "block_id": "block_creator",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "Creator"
+                },
+                "accessory": {
+                    "type": "static_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "Select an item",
+                        "emoji": true
+                    },
+                    "initial_option": users[0],
+                    "options": users,
+                    "action_id": "creator"
+                }
+            },
             {
                 "type": "section",
                 "block_id": "block_users",
@@ -381,7 +390,7 @@ export const getCreatedIssueView = ({
         {
             "type": "section",
             "text": {
-                "type": "mrkdwn",
+                "type": "plain_text",
                 "text": `*Created by*: ${createdBy}`,
                 "emoji": true
             }
@@ -389,7 +398,7 @@ export const getCreatedIssueView = ({
         {
             "type": "section",
             "text": {
-                "type": "mrkdwn",
+                "type": "plain_text",
                 "text": `*Assignee*: ${assignee}`,
                 "emoji": true
             }
@@ -397,19 +406,19 @@ export const getCreatedIssueView = ({
         {
             "type": "section",
             "text": {
-                "type": "mrkdwn",
+                "type": "plain_text",
                 "text": `*Status*: ${issueStatus}`,
                 "emoji": true
             }
         },
-        // {
-        //     "type": "section",
-        //     "text": {
-        //         "type": "plain_text",
-        //         "text": `Sprint: ${board}`,
-        //         "emoji": true
-        //     }
-        // },
+        {
+            "type": "section",
+            "text": {
+                "type": "plain_text",
+                "text": `Sprint: ${board}`,
+                "emoji": true
+            }
+        },
         // {
         //     "type": "video",
         //     "title": {

@@ -1,4 +1,13 @@
-export const getIssueTemplate = ({title, description, assignee, createdBy, sprint, status, videoUrl, videoThumbUrl}) => {
+export const getIssueTemplate = ({
+                                     title,
+                                     description,
+                                     assignee = null,
+                                     createdBy,
+                                     sprint,
+                                     status,
+                                     videoUrl,
+                                     videoThumbUrl
+                                 }) => {
     const descriptionTemplate = `Created by: ${createdBy}.\n\n-------------------------------------\n\n${description}\n\nVideo: ${videoUrl}`;
 
     return {
@@ -8,7 +17,7 @@ export const getIssueTemplate = ({title, description, assignee, createdBy, sprin
             description: descriptionTemplate,
             assignee,
             status: status,
-            // sprints: sprint
+            sprints: sprint
             // attachments: [
             //     {
             //         className: "VideoAttachment",

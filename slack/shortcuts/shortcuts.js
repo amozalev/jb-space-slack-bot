@@ -25,8 +25,7 @@ const getAllIssueStatuses = async () => {
 const getAllBoards = async () => {
     try {
         const resp = await issuesApi.getAllBoards({projectId: process.env.SPACE_PROJECT_ID});
-        //TODO temporarily disabled. permissions required
-        return [];// resp['data']['data'];
+        return resp['data']['data'];
     } catch (e) {
         console.error('===== getAllBoards error:', e);
         return [];

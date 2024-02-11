@@ -8,9 +8,9 @@ export const issuesApi = {
             status: '',
         }
 
-        return await axiosClient.post(`/projects/${projectId}/planning/issues`, {
+        return await axiosClient.post(`/projects/${projectId}/planning/issues?$fields=channel(id),title,id,projectId,number`, {
             ...fetchParams,
-            ...data
+            ...data,
         });
     },
 
@@ -32,5 +32,11 @@ export const issuesApi = {
 
     getAllBoards: async ({projectId}) => {
         return await axiosClient.get(`/projects/${projectId}/planning/boards/sprints?$fields=data(id,name,state)`);
+    },
+
+    addUserToChannel: async ({issueId, creatorId}) => {
+        return await axiosClient.post(`/chats/channels/issue:id:${issueId}/subscribers/users`,
+            {profiles: [`id:${creatorId}`]}
+        )
     }
 };
