@@ -34,6 +34,7 @@ export const homeEventListener = async ({event, client, body, context}) => {
     }
 }
 
+//Disabled
 export const fileShareEventListener = async ({event, client, body, context, say}) => {
     const {file_id, channel_id, user_id} = event;
 

@@ -44,6 +44,7 @@ export const getHoveView = ({videoClipPicture, shortcutPicture, bugsChannelId}) 
 
 export const getIssueFormMessage = ({
                                         channelId,
+                                        userId,
                                         videoUrl,
                                         videoThumbnailUrl,
                                         embedVideoUrl,
@@ -257,6 +258,7 @@ export const getIssueFormMessage = ({
 
     return {
         channel: channelId,
+        user: userId,
         blocks: updatedBlocks,
         // Fallback text to use when rich media can't be displayed (i.e. notifications) as well as for screen readers
         text: "Video is saved, please fill in the issue form",

@@ -35,7 +35,7 @@ const getAllBoards = async () => {
 export const createBugShortcut = async ({body, client, ack}) => {
     await ack();
 
-    const {message: {files}, channel: {id: channelId}} = body
+    const {message: {files}, user: {id: userId}, channel: {id: channelId}} = body
 
     if (files.length) {
         const file = files[0];
@@ -77,8 +77,9 @@ export const createBugShortcut = async ({body, client, ack}) => {
             }));
 
         try {
-            const msgResponse = await client.chat.postMessage(getIssueFormMessage({
+            const msgResponse = await client.chat.postEphemeral(getIssueFormMessage({
                 channelId: channelId,
+                userId: userId,
                 videoUrl: mp4,
                 videoThumbnailUrl: thumb_video,
                 embedVideoUrl: hls_embed,
